@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <numeric>
 #include <cassert>
 
 typedef std::vector<std::vector<int>> Matrix;
@@ -19,19 +18,16 @@ Matrix multiply(const Matrix &m1, const Matrix &m2)
     assert((m1_columns == m2_rows) && "The columns of the first matrix and the rows of the second must be equal in order to perform the multiply operation.");
 
     Matrix m3(m1_rows, std::vector<int>(m2_columns));
-    for (int i = 0; i < m1_rows; i++)
+    for (int i = 0; i < m1_rows; ++i)
     {
-        std::vector<int> elements(m1_rows);
-        for (int j = 0; j < m2_columns; j++)
+        for (int j = 0; j < m2_columns; ++j)
         {
-            std::vector<int> product_list(m1_columns);
-            for (int n = 0; n < m1_columns; n++)
+            int sum_of_product = 0;
+            for (int n = 0; n < m1_columns; ++n)
             {
-                int product = m1[i][n] * m2[n][j];
-                product_list[n] = product;
+                sum_of_product += m1[i][n] * m2[n][j];
             }
-            int sum_of_products = std::accumulate(product_list.begin(), product_list.end(), 0);
-            m3[i][j] = sum_of_products;
+            m3[i][j] = sum_of_product;
         } 
     }
     return m3;

@@ -19,29 +19,35 @@ Matrix multiply(const Matrix &m1, const Matrix &m2)
     assert((m1_columns == m2_rows) && "The columns of the first matrix and the rows of the second must be equal in order to perform the multiply operation.");
 
     Matrix m3(m1_rows, std::vector<int>(m2_columns));
-    m3.clear();
     for (int i = 0; i < m1_rows; i++)
     {
-        std::vector<int> elements;
+        std::vector<int> elements(m1_rows);
         for (int j = 0; j < m2_columns; j++)
         {
             std::vector<int> product_list(m1_columns);
-            product_list.clear();
             for (int n = 0; n < m1_columns; n++)
             {
                 int product = m1[i][n] * m2[n][j];
-                product_list.push_back(product);
+                product_list[n] = product;
             }
             int sum_of_products = std::accumulate(product_list.begin(), product_list.end(), 0);
-            elements.push_back(sum_of_products);
+            m3[i][j] = sum_of_products;
         } 
-        m3.push_back(elements);
     }
     return m3;
 }
 
 int main()
 {
+    std::cout << "Solution:\n";
+    Matrix answer = multiply({{1,2,1}, {0,1,0}, {2,3,4}}, {{2,5}, {6,7}, {1,8}});
+    for(int i = 0; i < answer.size(); i++)
+    {
+		for(int j = 0; j < answer[0].size(); j++)
+		std::cout << answer[i][j]<<" ";
+		std::cout << std::endl;
+    }
+/*
     int user_m1_rows;
     int user_m1_columns;
 
@@ -99,4 +105,5 @@ int main()
 		    std::cout << std::endl;
         }
     }
+    */
 }

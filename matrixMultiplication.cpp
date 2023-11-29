@@ -6,11 +6,11 @@ typedef std::vector<std::vector<int>> Matrix;
 
 inline Matrix multiply(Matrix &m1, Matrix &m2) 
 {
-    int m1_rows = m1.size();
-    int m1_columns = m1[0].size();
+    size_t m1_rows = m1.size();
+    size_t m1_columns = m1[0].size();
 
-    int m2_rows = m2.size();
-    int m2_columns = m2[0].size();
+    size_t m2_rows = m2.size();
+    size_t m2_columns = m2[0].size();
 
     Matrix m3(m1_rows, std::vector<int>(m2_columns));
     m3.clear();

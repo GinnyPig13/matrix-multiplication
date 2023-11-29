@@ -1,16 +1,22 @@
 #include <iostream>
 #include <vector>
 #include <numeric>
+#include <cassert>
 
 typedef std::vector<std::vector<int>> Matrix;
 
-inline Matrix multiply(const Matrix &m1, const Matrix &m2) 
+Matrix multiply(const Matrix &m1, const Matrix &m2) 
 {
+    assert((m1.empty() == false) && "Matrix 1 is missing.");
+    assert((m2.empty() == false) && "Matrix 2 is missing.");
+
     size_t m1_rows = m1.size();
     size_t m1_columns = m1[0].size();
 
     size_t m2_rows = m2.size();
     size_t m2_columns = m2[0].size();
+
+    assert((m1_columns == m2_rows) && "The columns of the first matrix and the rows of the second must be equal in order to perform the multiply operation.");
 
     Matrix m3(m1_rows, std::vector<int>(m2_columns));
     m3.clear();

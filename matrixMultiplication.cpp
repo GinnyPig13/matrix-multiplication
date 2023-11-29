@@ -4,7 +4,7 @@
 
 typedef std::vector<std::vector<int>> Matrix;
 
-inline Matrix multiply(Matrix &m1, Matrix &m2) 
+inline Matrix multiply(const Matrix &m1, const Matrix &m2) 
 {
     size_t m1_rows = m1.size();
     size_t m1_columns = m1[0].size();
